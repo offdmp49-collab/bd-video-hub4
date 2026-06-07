@@ -6,71 +6,60 @@
 <title>BD Video Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2230;--red:#e8192c;--red2:#ff3347;--gold:#ffd700;--orange:#ff8c00;--green:#00c853;--blue:#1565c0;--text:#f0f0f0;--text2:#8b949e;--border:#30363d;}
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2230;--red:#e8192c;--red2:#ff3347;--gold:#ffd700;--green:#00c853;--blue:#1565c0;--text:#f0f0f0;--text2:#8b949e;--border:#30363d;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'Hind Siliguri',sans-serif;min-height:100vh;overflow-x:hidden;}
-
-/* TOP BANNER */
-.top-banner{background:linear-gradient(90deg,#b30000,var(--red),#b30000);text-align:center;padding:9px 16px;font-size:14px;font-weight:700;letter-spacing:.5px;}
-
-/* HEADER */
+body{background:var(--bg);color:var(--text);font-family:'Hind Siliguri',sans-serif;min-height:100vh;overflow-x:hidden;padding-bottom:80px;}
+.top-banner{background:linear-gradient(90deg,#b30000,var(--red),#b30000);text-align:center;padding:9px 16px;font-size:14px;font-weight:700;}
 header{background:var(--bg2);border-bottom:2px solid var(--red);padding:0 14px;display:flex;align-items:center;justify-content:space-between;height:54px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.5);}
 .logo{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:700;color:#fff;}
 .logo-icon{width:30px;height:30px;background:linear-gradient(135deg,var(--red),var(--red2));border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;}
 .logo span{color:var(--red);}
 .search-btn{background:linear-gradient(135deg,var(--red),var(--red2));border:none;color:#fff;padding:8px 16px;border-radius:8px;font-family:inherit;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:600;}
-
-/* CHAT NOTIFICATION POPUP */
+/* CHAT POPUP */
 .chat-popup{position:fixed;top:70px;left:14px;right:14px;background:linear-gradient(135deg,#1a2a5e,#1e3a8a);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;z-index:200;box-shadow:0 4px 20px rgba(0,0,0,.5);animation:slideDown .4s ease;}
 @keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
 .chat-popup.hidden{display:none;}
-.chat-avatar{width:50px;height:50px;border-radius:50%;object-fit:cover;border:2px solid var(--red);}
-.chat-avatar-placeholder{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--red),#ff6b7a);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.chat-avatar-ph{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--red),#ff6b7a);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;overflow:hidden;}
+.chat-avatar-ph img{width:100%;height:100%;object-fit:cover;}
 .chat-info{flex:1;}
 .chat-name{font-weight:700;font-size:15px;margin-bottom:3px;}
 .chat-msg{font-size:12px;color:#cce0ff;line-height:1.4;}
 .chat-btn{background:#fff;color:#1a2a5e;border:none;padding:8px 14px;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0;}
 .chat-close{position:absolute;top:8px;right:10px;background:none;border:none;color:#aaa;font-size:18px;cursor:pointer;line-height:1;}
-
-/* SECTION HEADER */
-.section-header{background:var(--red);padding:10px 14px;display:flex;align-items:center;gap:10px;margin-bottom:0;}
-.section-header .badge-num{background:#fff;color:var(--red);font-weight:800;font-size:13px;padding:2px 8px;border-radius:6px;}
-.section-header .section-date{font-weight:700;font-size:15px;color:#fff;}
-
-/* POSTS HORIZONTAL SCROLL */
-.posts-scroll-wrap{background:var(--bg2);padding:12px 14px;margin-bottom:4px;}
+/* SECTIONS */
+.section-header{background:var(--red);padding:10px 14px;display:flex;align-items:center;gap:10px;margin-top:4px;}
+.badge-num{background:#fff;color:var(--red);font-weight:800;font-size:13px;padding:2px 8px;border-radius:6px;}
+.section-date{font-weight:700;font-size:15px;color:#fff;}
+.posts-scroll-wrap{background:var(--bg2);padding:12px 14px;}
 .posts-scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;}
 .posts-scroll::-webkit-scrollbar{height:3px;}
 .posts-scroll::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px;}
-
-/* TRENDING SECTION */
-.trending-header{background:var(--red);padding:10px 14px;margin:4px 0 0;}
+/* CARDS */
+.post-card{width:140px;flex-shrink:0;border-radius:10px;overflow:hidden;background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:transform .2s;}
+.post-card:hover{transform:scale(1.03);}
+.post-thumb-wrap{width:140px;height:90px;position:relative;overflow:hidden;background:var(--bg3);}
+.post-thumb-wrap img{width:100%;height:100%;object-fit:cover;}
+.post-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:28px;}
+.play-btn-sm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);}
+.play-btn-sm span{width:32px;height:32px;background:rgba(232,25,44,.85);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;}
+.badges-row{position:absolute;top:5px;left:5px;display:flex;gap:3px;flex-wrap:wrap;}
+.bh{background:var(--blue);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;}
+.bp{background:var(--gold);color:#000;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;}
+.bn{background:var(--green);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;}
+.b4{background:#7c3aed;color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;}
+.post-card-title{padding:6px 8px 8px;font-size:12px;font-weight:600;line-height:1.35;}
+/* TRENDING */
+.trending-header{background:var(--red);padding:10px 14px;margin-top:4px;}
 .trending-header h2{font-size:16px;font-weight:700;color:#fff;}
 .trending-posts{background:var(--bg2);padding:12px 14px;}
 .trending-card{border-radius:12px;overflow:hidden;background:var(--bg3);border:1px solid var(--border);margin-bottom:12px;cursor:pointer;transition:transform .2s;}
 .trending-card:hover{transform:scale(1.01);}
-.trending-thumb{width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;}
+.trending-thumb{width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;background:var(--bg3);}
 .trending-thumb img{width:100%;height:100%;object-fit:cover;}
-.trending-thumb-placeholder{width:100%;height:100%;background:linear-gradient(135deg,#1a1a2e,#16213e);display:flex;align-items:center;justify-content:center;font-size:40px;}
+.trending-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px;}
 .trending-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);}
 .trending-play-btn{width:52px;height:52px;background:rgba(232,25,44,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;}
 .trending-title{padding:10px 12px 12px;font-size:15px;font-weight:600;}
-
-/* SMALL POST CARD */
-.post-card{width:140px;flex-shrink:0;border-radius:10px;overflow:hidden;background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:transform .2s;}
-.post-card:hover{transform:scale(1.03);}
-.post-thumb-wrap{width:140px;height:90px;position:relative;overflow:hidden;}
-.post-thumb-wrap img{width:100%;height:100%;object-fit:cover;}
-.post-thumb-placeholder{width:100%;height:100%;background:linear-gradient(135deg,#1a1a2e,#16213e);display:flex;align-items:center;justify-content:center;font-size:28px;}
-.play-btn-sm{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);}
-.play-btn-sm span{width:32px;height:32px;background:rgba(232,25,44,.85);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;}
-.badges-row{position:absolute;top:5px;left:5px;display:flex;gap:3px;flex-wrap:wrap;}
-.badge-hd{background:var(--blue);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;}
-.badge-premium{background:var(--gold);color:#000;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;}
-.badge-new{background:var(--green);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;}
-.badge-4k{background:#7c3aed;color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;}
-.post-card-title{padding:6px 8px 8px;font-size:12px;font-weight:600;line-height:1.35;}
-
 /* BOTTOM NAV */
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:flex-end;padding:6px 0 10px;z-index:100;}
 .nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--text2);cursor:pointer;transition:.2s;padding:0 10px;}
@@ -80,13 +69,13 @@ header{background:var(--bg2);border-bottom:2px solid var(--red);padding:0 14px;d
 .nav-home .ni-wrap{background:linear-gradient(135deg,var(--red),var(--red2));border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 0 18px rgba(232,25,44,.5);}
 .notif-wrap{position:relative;}
 .notif-dot{position:absolute;top:-3px;right:-3px;background:var(--red);color:#fff;font-size:8px;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 3px;}
-body{padding-bottom:80px;}
-
-/* EMPTY STATE */
-.empty-state{text-align:center;padding:50px 20px;color:var(--text2);}
+/* EMPTY / LOADING */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text2);}
 .empty-state .ei{font-size:55px;margin-bottom:14px;}
-
-/* ===== VIDEO MODAL ===== */
+.loading-screen{display:flex;align-items:center;justify-content:center;padding:60px 20px;flex-direction:column;gap:16px;color:var(--text2);}
+.loading-spin{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* VIDEO MODAL */
 .v-modal{display:none;position:fixed;inset:0;background:#000;z-index:300;overflow-y:auto;}
 .v-modal.open{display:block;}
 .v-modal-inner{max-width:600px;margin:0 auto;padding:14px;}
@@ -97,7 +86,6 @@ body{padding-bottom:80px;}
 .v-title{font-size:17px;font-weight:700;margin-bottom:6px;}
 .v-meta{color:var(--text2);font-size:13px;margin-bottom:16px;}
 .v-dl-btn{width:100%;background:linear-gradient(135deg,var(--red),var(--red2));border:none;color:#fff;padding:14px;border-radius:10px;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
-
 /* SEARCH MODAL */
 .s-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:400;padding:14px;}
 .s-modal.open{display:block;}
@@ -106,53 +94,44 @@ body{padding-bottom:80px;}
 .s-input:focus{outline:none;border-color:var(--red);}
 .s-close{background:var(--bg3);border:1px solid var(--border);color:var(--text2);padding:12px 14px;border-radius:10px;cursor:pointer;font-size:16px;}
 .s-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-
 /* AD LOADER */
 .ad-loader{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:500;align-items:center;justify-content:center;flex-direction:column;}
 .ad-loader.show{display:flex;}
 .ad-spin{width:46px;height:46px;border:3px solid var(--border);border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:14px;}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* FLOATING MSG BTN */
 .float-msg{position:fixed;bottom:90px;right:16px;width:48px;height:48px;background:linear-gradient(135deg,var(--red),var(--red2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;box-shadow:0 4px 15px rgba(232,25,44,.5);z-index:99;}
 </style>
 </head>
 <body>
-
 <div class="top-banner">🔥 BD VIDEO HUB — সেরা ভিডিও কালেকশন 🔥</div>
-
 <header>
   <div class="logo"><div class="logo-icon">🎬</div><span>BD</span> Video</div>
   <button class="search-btn" onclick="openSearch()">🔍 খুঁজুন</button>
 </header>
 
-<!-- CHAT POPUP -->
-<div class="chat-popup" id="chatPopup">
+<div class="chat-popup hidden" id="chatPopup">
   <button class="chat-close" onclick="document.getElementById('chatPopup').classList.add('hidden')">✕</button>
-  <div class="chat-avatar-placeholder">👩</div>
+  <div class="chat-avatar-ph" id="chatAvatarWrap">👩</div>
   <div class="chat-info">
     <div class="chat-name" id="chatName">LINA</div>
     <div class="chat-msg" id="chatMsg">আমি তোমার সমস্ত কল্পনা পূরণ করব!</div>
   </div>
-  <button class="chat-btn" id="chatBtnEl" onclick="openChatLink()">চ্যাট</button>
+  <button class="chat-btn" onclick="openChatLink()">চ্যাট</button>
 </div>
 
-<!-- MAIN CONTENT -->
-<div id="mainContent"></div>
+<div id="mainContent">
+  <div class="loading-screen"><div class="loading-spin"></div><p>লোড হচ্ছে...</p></div>
+</div>
 
-<!-- FLOAT MSG -->
 <div class="float-msg" onclick="openChatLink()">✉️</div>
 
-<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
   <div class="nav-item active" onclick="scrollToTop()"><span class="ni">📁</span><span>ফাইল</span></div>
   <div class="nav-item" onclick="scrollToTop()"><span class="ni">🎬</span><span>নতুন</span></div>
   <div class="nav-item nav-home" onclick="scrollToTop()"><div class="ni-wrap">🏠</div></div>
-  <div class="nav-item notif-wrap" onclick="scrollToTop()"><span class="ni">📷</span><span>ট্রেন্ড</span><span class="notif-dot" id="notifDot">99+</span></div>
+  <div class="nav-item notif-wrap"><span class="ni">📷</span><span>ট্রেন্ড</span><span class="notif-dot" id="notifDot">0</span></div>
   <div class="nav-item" onclick="openSearch()"><span class="ni">🔍</span><span>খুঁজুন</span></div>
 </nav>
 
-<!-- VIDEO MODAL -->
 <div class="v-modal" id="vModal">
   <div class="v-modal-inner">
     <button class="v-back" onclick="closeVideo()">← পিছনে যান</button>
@@ -163,7 +142,6 @@ body{padding-bottom:80px;}
   </div>
 </div>
 
-<!-- SEARCH MODAL -->
 <div class="s-modal" id="sModal">
   <div class="s-row">
     <input class="s-input" id="sInput" placeholder="ভিডিও খুঁজুন..." oninput="doSearch(this.value)">
@@ -172,237 +150,131 @@ body{padding-bottom:80px;}
   <div class="s-grid" id="sGrid"></div>
 </div>
 
-<!-- AD LOADER -->
 <div class="ad-loader" id="adLoader">
   <div class="ad-spin"></div>
   <p style="color:#aaa;font-size:13px">লোড হচ্ছে...</p>
 </div>
 
-<script>
-// ===== GLOBALS =====
-let posts = [];
-let settings = {};
-// Per-post click tracking: {postId: count}
-let clickMap = {};
-let currentPost = null;
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-function loadData() {
-  posts = JSON.parse(localStorage.getItem('bdvh_posts') || '[]');
-  settings = JSON.parse(localStorage.getItem('bdvh_settings') || '{}');
+const app = initializeApp({ databaseURL: "https://bd-video-hub-b8f5c-default-rtdb.firebaseio.com" });
+const db = getDatabase(app);
+
+let posts = [], settings = {}, clickMap = {}, currentPost = null;
+
+onValue(ref(db,'settings'), snap => {
+  settings = snap.val() || {};
+  if(settings.chatName) document.getElementById('chatName').textContent = settings.chatName;
+  if(settings.chatMsg) document.getElementById('chatMsg').textContent = settings.chatMsg;
+  if(settings.chatImg) document.getElementById('chatAvatarWrap').innerHTML = `<img src="${settings.chatImg}" alt="">`;
+  if(settings.chatLink) document.getElementById('chatPopup').classList.remove('hidden');
+  // inject ad scripts
+  if(settings.monetagScript && !document.getElementById('monetag-script')) {
+    const s=document.createElement('script'); s.id='monetag-script'; s.src=settings.monetagScript; document.head.appendChild(s);
+  }
+  if(settings.adsterraScript && !document.getElementById('adsterra-script')) {
+    const s=document.createElement('script'); s.id='adsterra-script'; s.src=settings.adsterraScript; document.head.appendChild(s);
+  }
+});
+
+onValue(ref(db,'posts'), snap => {
+  const data = snap.val();
+  posts = data ? Object.values(data).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)) : [];
+  const cnt = posts.filter(p=>p.active!==false).length;
+  document.getElementById('notifDot').textContent = cnt > 99 ? '99+' : cnt;
   renderAll();
-  // Chat popup from settings
-  if (settings.chatName) document.getElementById('chatName').textContent = settings.chatName;
-  if (settings.chatMsg) document.getElementById('chatMsg').textContent = settings.chatMsg;
-  if (!settings.chatLink) document.getElementById('chatPopup').classList.add('hidden');
-  // Notif badge
-  document.getElementById('notifDot').textContent = posts.length > 99 ? '99+' : posts.length || '0';
-}
+});
 
 function renderAll() {
-  const container = document.getElementById('mainContent');
-  const activePosts = posts.filter(p => p.active !== false);
-  if (!activePosts.length) {
-    container.innerHTML = '<div class="empty-state"><div class="ei">🎬</div><p style="font-size:16px">কোনো ভিডিও নেই এখনো</p></div>';
-    return;
-  }
-
-  // Group by date/section
-  const byDate = {};
-  activePosts.forEach(p => {
-    const key = p.date || 'আজ';
-    if (!byDate[key]) byDate[key] = [];
-    byDate[key].push(p);
+  const c = document.getElementById('mainContent');
+  const active = posts.filter(p=>p.active!==false);
+  if(!active.length){ c.innerHTML='<div class="empty-state"><div class="ei">🎬</div><p style="font-size:16px">কোনো ভিডিও নেই এখনো</p></div>'; return; }
+  const byDate={};
+  active.forEach(p=>{ const k=p.date||'আজ'; if(!byDate[k])byDate[k]=[]; byDate[k].push(p); });
+  let html='';
+  Object.keys(byDate).forEach(date=>{
+    const g=byDate[date];
+    html+=`<div class="section-header"><span class="badge-num">${g.length}</span><span class="section-date">${date} • TODAY NEW</span></div>
+    <div class="posts-scroll-wrap"><div class="posts-scroll">${g.map(buildSmallCard).join('')}</div></div>`;
   });
-
-  let html = '';
-  const dates = Object.keys(byDate);
-
-  // Trending = first post if marked, or first overall
-  const trendingPosts = activePosts.filter(p => p.trending);
-  const todayPosts = activePosts.filter(p => !p.trending);
-
-  // TODAY NEW sections
-  dates.forEach((date, di) => {
-    const group = byDate[date];
-    html += `
-      <div class="section-header">
-        <span class="badge-num">${group.length}</span>
-        <span class="section-date">${date} • TODAY NEW</span>
-      </div>
-      <div class="posts-scroll-wrap">
-        <div class="posts-scroll">
-          ${group.map(p => buildSmallCard(p)).join('')}
-        </div>
-      </div>
-    `;
-  });
-
-  // TRENDING NOW
-  if (activePosts.length > 0) {
-    const tList = trendingPosts.length ? trendingPosts : [activePosts[0]];
-    html += `
-      <div class="trending-header"><h2>🔥 TRENDING NOW</h2></div>
-      <div class="trending-posts">
-        ${tList.map(p => buildTrendingCard(p)).join('')}
-      </div>
-    `;
-  }
-
-  container.innerHTML = html;
+  const trending=active.filter(p=>p.trending);
+  if(trending.length) html+=`<div class="trending-header"><h2>🔥 TRENDING NOW</h2></div><div class="trending-posts">${trending.map(buildTrendingCard).join('')}</div>`;
+  c.innerHTML=html;
 }
 
-function buildSmallCard(p) {
-  const badges = buildBadges(p);
-  return `
-    <div class="post-card" onclick="handleClick('${p.id}')">
-      <div class="post-thumb-wrap">
-        ${p.thumbnail
-          ? `<img src="${p.thumbnail}" onerror="this.parentElement.innerHTML='<div class=post-thumb-placeholder>🎬</div>'" alt="">`
-          : '<div class="post-thumb-placeholder">🎬</div>'}
-        <div class="play-btn-sm"><span>▶</span></div>
-        <div class="badges-row">${badges}</div>
-      </div>
-      <div class="post-card-title">${p.title}</div>
-    </div>
-  `;
+function badges(p){
+  return (p.badgeHD?'<span class="bh">HD</span>':'')+(p.badge4K?'<span class="b4">4K</span>':'')+(p.badgePremium?'<span class="bp">PREMIUM</span>':'')+(p.badgeNew?'<span class="bn">NEW</span>':'');
+}
+function buildSmallCard(p){
+  return `<div class="post-card" onclick="window._click('${p.id}')">
+    <div class="post-thumb-wrap">${p.thumbnail?`<img src="${p.thumbnail}" onerror="this.style.display='none'" alt="">`:'<div class="post-thumb-ph">🎬</div>'}
+    <div class="play-btn-sm"><span>▶</span></div><div class="badges-row">${badges(p)}</div></div>
+    <div class="post-card-title">${p.title}</div></div>`;
+}
+function buildTrendingCard(p){
+  return `<div class="trending-card" onclick="window._click('${p.id}')">
+    <div class="trending-thumb">${p.thumbnail?`<img src="${p.thumbnail}" onerror="this.style.display='none'" alt="">`:'<div class="trending-thumb-ph">🎬</div>'}
+    <div class="trending-play"><div class="trending-play-btn">▶</div></div><div class="badges-row">${badges(p)}</div></div>
+    <div class="trending-title">${p.title}</div></div>`;
 }
 
-function buildTrendingCard(p) {
-  const badges = buildBadges(p);
-  return `
-    <div class="trending-card" onclick="handleClick('${p.id}')">
-      <div class="trending-thumb">
-        ${p.thumbnail
-          ? `<img src="${p.thumbnail}" onerror="this.parentElement.innerHTML='<div class=trending-thumb-placeholder>🎬</div>'" alt="">`
-          : '<div class="trending-thumb-placeholder">🎬</div>'}
-        <div class="trending-play"><div class="trending-play-btn">▶</div></div>
-        <div class="badges-row">${badges}</div>
-      </div>
-      <div class="trending-title">${p.title}</div>
-    </div>
-  `;
-}
-
-function buildBadges(p) {
-  let b = '';
-  if (p.badgeHD) b += '<span class="badge-hd">HD</span>';
-  if (p.badge4K) b += '<span class="badge-4k">4K</span>';
-  if (p.badgePremium) b += '<span class="badge-premium">PREMIUM</span>';
-  if (p.badgeNew) b += '<span class="badge-new">NEW</span>';
-  return b;
-}
-
-// ===== CLICK AD SYSTEM =====
-function handleClick(id) {
-  const post = posts.find(p => p.id === id);
-  if (!post) return;
-  currentPost = post;
-
-  if (!clickMap[id]) clickMap[id] = 0;
+window._click = id => {
+  const post=posts.find(p=>p.id===id); if(!post) return;
+  currentPost=post;
+  if(!clickMap[id]) clickMap[id]=0;
   clickMap[id]++;
-  const n = clickMap[id];
-
-  if (n === 1) {
-    // Click 1: Popunder
-    const url = settings.popunderUrl || '';
-    if (url) { try { window.open(url, '_blank'); } catch(e){} }
+  const n=clickMap[id];
+  if(n===1){
+    if(settings.popunderUrl) try{window.open(settings.popunderUrl,'_blank')}catch(e){}
     showLoader(1200);
-  } else if (n === 2) {
-    // Click 2: Per-post direct link
-    const url = post.directLink || settings.directLink2 || '';
-    if (url) window.open(url, '_blank');
+  } else if(n===2){
+    const url=post.directLink||settings.directLink2||'';
+    if(url) window.open(url,'_blank');
     showLoader(1000);
-  } else if (n === 3) {
-    // Click 3: Monetag direct link
-    const url = settings.monetagUrl || '';
-    if (url) window.open(url, '_blank');
+  } else if(n===3){
+    if(settings.monetagUrl) window.open(settings.monetagUrl,'_blank');
     showLoader(1000);
   } else {
-    // Click 4+: Show video
-    clickMap[id] = 0;
-    openVideo(post);
+    clickMap[id]=0; openVideo(post);
   }
-}
+};
 
-function showLoader(ms) {
-  const el = document.getElementById('adLoader');
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), ms);
-}
-
-// ===== VIDEO =====
-function openVideo(post) {
-  let embed = '';
-  if (post.embedCode) {
-    embed = post.embedCode;
-  } else if (post.videoUrl) {
-    const yt = post.videoUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]+)/);
-    if (yt) embed = `<iframe src="https://www.youtube.com/embed/${yt[1]}?autoplay=1" allowfullscreen allow="autoplay"></iframe>`;
-    else embed = `<iframe src="${post.videoUrl}" allowfullscreen allow="autoplay"></iframe>`;
+function openVideo(post){
+  let e='';
+  if(post.embedCode) e=post.embedCode;
+  else if(post.videoUrl){
+    const yt=post.videoUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([\w-]+)/);
+    e=yt?`<iframe src="https://www.youtube.com/embed/${yt[1]}?autoplay=1" allowfullscreen allow="autoplay"></iframe>`:`<iframe src="${post.videoUrl}" allowfullscreen allow="autoplay"></iframe>`;
   }
-  document.getElementById('vEmbed').innerHTML = embed || '<p style="color:#aaa;padding:30px;text-align:center">ভিডিও পাওয়া যাচ্ছে না</p>';
-  document.getElementById('vTitle').textContent = post.title;
-  document.getElementById('vMeta').textContent = `সেকশন: ${post.section || '-'} | তারিখ: ${post.date || 'আজ'}`;
-  // increment views
-  post.views = (post.views || 0) + 1;
-  localStorage.setItem('bdvh_posts', JSON.stringify(posts));
+  document.getElementById('vEmbed').innerHTML=e||'<p style="color:#aaa;padding:30px;text-align:center">ভিডিও পাওয়া যাচ্ছে না</p>';
+  document.getElementById('vTitle').textContent=post.title;
+  document.getElementById('vMeta').textContent=`সেকশন: ${post.section||'-'} | তারিখ: ${post.date||'আজ'}`;
+  set(ref(db,`posts/${post.id}/views`),(post.views||0)+1);
   document.getElementById('vModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
 }
 
-function closeVideo() {
-  document.getElementById('vModal').classList.remove('open');
-  document.getElementById('vEmbed').innerHTML = '';
-  document.body.style.overflow = '';
-}
-
-// ===== DOWNLOAD =====
-function handleDownload() {
-  const adUrl = (currentPost && currentPost.downloadAdUrl) || settings.downloadAdUrl || '';
-  if (adUrl) window.open(adUrl, '_blank');
-  if (currentPost && currentPost.downloadUrl) {
-    const a = document.createElement('a');
-    a.href = currentPost.downloadUrl;
-    a.download = currentPost.title || 'video';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
-}
-
-// ===== SEARCH =====
-function openSearch() { document.getElementById('sModal').classList.add('open'); document.getElementById('sInput').focus(); }
-function closeSearch() { document.getElementById('sModal').classList.remove('open'); }
-function doSearch(q) {
-  const grid = document.getElementById('sGrid');
-  if (!q.trim()) { grid.innerHTML = ''; return; }
-  const res = posts.filter(p => p.title.toLowerCase().includes(q.toLowerCase()) && p.active !== false);
-  if (!res.length) { grid.innerHTML = '<p style="color:#aaa;grid-column:1/-1;text-align:center;padding:30px">কিছু পাওয়া যায়নি</p>'; return; }
-  grid.innerHTML = res.map(p => `
-    <div class="post-card" style="width:100%" onclick="closeSearch();handleClick('${p.id}')">
-      <div class="post-thumb-wrap" style="width:100%;height:110px">
-        ${p.thumbnail ? `<img src="${p.thumbnail}" style="width:100%;height:100%;object-fit:cover" alt="">` : '<div class="post-thumb-placeholder">🎬</div>'}
-        <div class="play-btn-sm"><span>▶</span></div>
-      </div>
-      <div class="post-card-title">${p.title}</div>
-    </div>
-  `).join('');
-}
-
-function scrollToTop() { window.scrollTo({top:0,behavior:'smooth'}); }
-function openChatLink() { if (settings.chatLink) window.open(settings.chatLink,'_blank'); }
-
-// Init
-loadData();
-window.addEventListener('storage', loadData);
-
-// Monetag/Adsterra scripts injected from settings
-if (settings.monetagScript) {
-  const s = document.createElement('script'); s.src = settings.monetagScript; document.head.appendChild(s);
-}
-if (settings.adsterraScript) {
-  const s = document.createElement('script'); s.src = settings.adsterraScript; document.head.appendChild(s);
-}
+window.closeVideo=()=>{ document.getElementById('vModal').classList.remove('open'); document.getElementById('vEmbed').innerHTML=''; document.body.style.overflow=''; };
+window.handleDownload=()=>{
+  const url=(currentPost&&currentPost.downloadAdUrl)||settings.downloadAdUrl||'';
+  if(url) window.open(url,'_blank');
+  if(currentPost&&currentPost.downloadUrl){ const a=document.createElement('a'); a.href=currentPost.downloadUrl; a.download=currentPost.title||'video'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }
+};
+window.openSearch=()=>{ document.getElementById('sModal').classList.add('open'); document.getElementById('sInput').focus(); };
+window.closeSearch=()=>{ document.getElementById('sModal').classList.remove('open'); };
+window.doSearch=q=>{
+  const g=document.getElementById('sGrid');
+  if(!q.trim()){g.innerHTML='';return;}
+  const res=posts.filter(p=>p.title.toLowerCase().includes(q.toLowerCase())&&p.active!==false);
+  g.innerHTML=res.length?res.map(p=>`<div class="post-card" style="width:100%" onclick="closeSearch();window._click('${p.id}')">
+    <div class="post-thumb-wrap" style="width:100%;height:110px">${p.thumbnail?`<img src="${p.thumbnail}" style="width:100%;height:100%;object-fit:cover" alt="">`:''}<div class="play-btn-sm"><span>▶</span></div></div>
+    <div class="post-card-title">${p.title}</div></div>`).join(''):'<p style="color:#aaa;grid-column:1/-1;text-align:center;padding:30px">কিছু পাওয়া যায়নি</p>';
+};
+function showLoader(ms){ const e=document.getElementById('adLoader'); e.classList.add('show'); setTimeout(()=>e.classList.remove('show'),ms); }
+window.scrollToTop=()=>window.scrollTo({top:0,behavior:'smooth'});
+window.openChatLink=()=>{ if(settings.chatLink) window.open(settings.chatLink,'_blank'); };
 </script>
 </body>
 </html>
