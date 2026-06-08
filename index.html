@@ -125,10 +125,10 @@ header{background:var(--bg2);border-bottom:2px solid var(--red);padding:0 14px;d
 <div class="float-msg" onclick="openChatLink()">✉️</div>
 
 <nav class="bottom-nav">
-  <div class="nav-item active" onclick="scrollToTop()"><span class="ni">📁</span><span>ফাইল</span></div>
-  <div class="nav-item" onclick="scrollToTop()"><span class="ni">🎬</span><span>নতুন</span></div>
-  <div class="nav-item nav-home" onclick="scrollToTop()"><div class="ni-wrap">🏠</div></div>
-  <div class="nav-item notif-wrap"><span class="ni">📷</span><span>ট্রেন্ড</span><span class="notif-dot" id="notifDot">0</span></div>
+  <div class="nav-item active" id="nav-all" onclick="navFilter('all','nav-all')"><span class="ni">📁</span><span>ফাইল</span></div>
+  <div class="nav-item" id="nav-new" onclick="navFilter('new','nav-new')"><span class="ni">🎬</span><span>নতুন</span></div>
+  <div class="nav-item nav-home" id="nav-home" onclick="navFilter('all','nav-home');scrollToTop()"><div class="ni-wrap">🏠</div></div>
+  <div class="nav-item notif-wrap" id="nav-trend" onclick="navFilter('trending','nav-trend')"><span class="ni">📷</span><span>ট্রেন্ড</span><span class="notif-dot" id="notifDot">0</span></div>
   <div class="nav-item" onclick="openSearch()"><span class="ni">🔍</span><span>খুঁজুন</span></div>
 </nav>
 
@@ -174,8 +174,15 @@ onValue(ref(db,'settings'), snap => {
   if(settings.monetagScript && !document.getElementById('monetag-script')) {
     const s=document.createElement('script'); s.id='monetag-script'; s.src=settings.monetagScript; document.head.appendChild(s);
   }
+  // Adsterra Popunder script
   if(settings.adsterraScript && !document.getElementById('adsterra-script')) {
     const s=document.createElement('script'); s.id='adsterra-script'; s.src=settings.adsterraScript; document.head.appendChild(s);
+  }
+  // Adsterra Social Bar (পুরো script tag)
+  if(settings.adsterraSocialBar && !document.getElementById('ads-socialbar')) {
+    const wrap=document.createElement('div'); wrap.id='ads-socialbar'; wrap.innerHTML=settings.adsterraSocialBar;
+    document.body.insertBefore(wrap, document.body.firstChild);
+    wrap.querySelectorAll('script').forEach(s=>{ const ns=document.createElement('script'); ns.src=s.src||''; ns.textContent=s.textContent; document.body.appendChild(ns); });
   }
 });
 
@@ -227,8 +234,11 @@ window._click = id => {
   clickMap[id]++;
   const n=clickMap[id];
   if(n===1){
-    if(settings.popunderUrl) try{window.open(settings.popunderUrl,'_blank')}catch(e){}
-    showLoader(1200);
+    if(settings.popunderUrl){
+      const a=document.createElement('a'); a.href=settings.popunderUrl; a.target='_blank'; a.rel='noopener noreferrer';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
+    showLoader(1000);
   } else if(n===2){
     const url=post.directLink||settings.directLink2||'';
     if(url) window.open(url,'_blank');
@@ -273,8 +283,30 @@ window.doSearch=q=>{
     <div class="post-card-title">${p.title}</div></div>`).join(''):'<p style="color:#aaa;grid-column:1/-1;text-align:center;padding:30px">কিছু পাওয়া যায়নি</p>';
 };
 function showLoader(ms){ const e=document.getElementById('adLoader'); e.classList.add('show'); setTimeout(()=>e.classList.remove('show'),ms); }
+
+// নিচের বাটন ফিল্টার
+window.navFilter=(filter,navId)=>{
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const el=document.getElementById(navId); if(el) el.classList.add('active');
+  const c=document.getElementById('mainContent');
+  let active=posts.filter(p=>p.active!==false);
+  if(filter==='new') active=active.filter(p=>p.badgeNew);
+  else if(filter==='trending') active=active.filter(p=>p.trending);
+  if(!active.length){ c.innerHTML='<div class="empty-state"><div class="ei">🎬</div><p style="font-size:16px">কোনো ভিডিও নেই</p></div>'; return; }
+  const byDate={};
+  active.forEach(p=>{ const k=p.date||'আজ'; if(!byDate[k])byDate[k]=[]; byDate[k].push(p); });
+  let html='';
+  Object.keys(byDate).forEach(date=>{
+    const g=byDate[date];
+    html+=`<div class="section-header"><span class="badge-num">${g.length}</span><span class="section-date">${date} • TODAY NEW</span></div>
+    <div class="posts-scroll-wrap"><div class="posts-scroll">${g.map(buildSmallCard).join('')}</div></div>`;
+  });
+  if(filter==='all'){ const tr=active.filter(p=>p.trending); if(tr.length) html+=`<div class="trending-header"><h2>🔥 TRENDING NOW</h2></div><div class="trending-posts">${tr.map(buildTrendingCard).join('')}</div>`; }
+  c.innerHTML=html; scrollToTop();
+};
 window.scrollToTop=()=>window.scrollTo({top:0,behavior:'smooth'});
 window.openChatLink=()=>{ if(settings.chatLink) window.open(settings.chatLink,'_blank'); };
 </script>
 </body>
 </html>
+
