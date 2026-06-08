@@ -272,7 +272,8 @@ body{background:var(--bg);color:var(--text);font-family:'Hind Siliguri',sans-ser
         <div class="form-group" style="margin-top:12px"><label class="form-label">Monetag URL (৩য় ক্লিক)</label><input type="text" class="form-input" id="setMonetag" placeholder="https://... monetag URL" style="margin-bottom:0"></div>
         <div class="form-group" style="margin-top:12px"><label class="form-label">Download বাটন Global অ্যাড</label><input type="text" class="form-input" id="setDlAd" placeholder="https://... ডাউনলোড অ্যাড URL" style="margin-bottom:0"></div>
         <div class="form-group" style="margin-top:12px"><label class="form-label">Monetag Script URL</label><input type="text" class="form-input" id="setMonScript" placeholder="//monetag.com/script.js" style="margin-bottom:0"></div>
-        <div class="form-group" style="margin-top:12px"><label class="form-label">Adsterra Script URL</label><input type="text" class="form-input" id="setAdsScript" placeholder="//ads.com/script.js" style="margin-bottom:0"></div>
+        <div class="form-group" style="margin-top:12px"><label class="form-label">Adsterra Popunder Script URL</label><input type="text" class="form-input" id="setAdsScript" placeholder="//popunder script URL দিন" style="margin-bottom:0"></div>
+        <div class="form-group" style="margin-top:12px"><label class="form-label">Adsterra Social Bar (পুরো script কোড)</label><textarea class="form-textarea" id="setAdsSocialBar" placeholder="Adsterra Social Bar এর পুরো &lt;script&gt; কোড এখানে paste করুন..."></textarea></div>
       </div>
 
       <div class="settings-group" style="margin-top:22px">
@@ -540,6 +541,7 @@ function loadSettingsForm(){
   document.getElementById('setDlAd').value=settings.downloadAdUrl||'';
   document.getElementById('setMonScript').value=settings.monetagScript||'';
   document.getElementById('setAdsScript').value=settings.adsterraScript||'';
+  if(document.getElementById('setAdsSocialBar')) document.getElementById('setAdsSocialBar').value=settings.adsterraSocialBar||'';
   document.getElementById('setChatName').value=settings.chatName||'';
   document.getElementById('setChatMsg').value=settings.chatMsg||'';
   document.getElementById('setChatImg').value=settings.chatImg||'';
@@ -554,6 +556,7 @@ window.saveSettings=async()=>{
     downloadAdUrl: document.getElementById('setDlAd').value.trim(),
     monetagScript: document.getElementById('setMonScript').value.trim(),
     adsterraScript: document.getElementById('setAdsScript').value.trim(),
+    adsterraSocialBar: document.getElementById('setAdsSocialBar') ? document.getElementById('setAdsSocialBar').value.trim() : '',
     chatName: document.getElementById('setChatName').value.trim(),
     chatMsg: document.getElementById('setChatMsg').value.trim(),
     chatImg: document.getElementById('setChatImg').value.trim(),
